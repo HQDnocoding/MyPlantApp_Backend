@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lỗi [[${status}]]</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo2.png}">
+
+</head>
+<body class="error-body">
+<div>
+
+    <h1>Đã xảy ra lỗi [[${status}]]</h1>
+    <p>[[${error}]]</p>
+    <p th:if="${message}">Chi tiết: [[${message}]]</p>
+    <a th:href="@{/}">Quay lại trang chủ</a>
+</div>
+
+</body>
+</html>

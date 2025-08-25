@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo2.png}">
+
+</head>
+<body>
+
+<!-- Include Header -->
+<div th:replace="~{base :: header}"></div>
+<section class="dashboard">
+    <h1>Trang quản lý</h1>
+    <p>Xin chào <span th:text="${username}">Admin</span>, đây là bảng điều khiển tổng quan.</p>
+</section>
+
+<section class="stats">
+    <div class="cards">
+        <div class="card">
+            <h3>Tổng số người dùng</h3>
+            <p th:text="${userCount}">120</p>
+        </div>
+        <div class="card">
+            <h3>Tổng số thuốc BVTV</h3>
+            <p th:text="${pesticideCount}">45</p>
+        </div>
+    </div>
+</section>
+<main>
+
+</main>
+
+
+</body>
+</html>

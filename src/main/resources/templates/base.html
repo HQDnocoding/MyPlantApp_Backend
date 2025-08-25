@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo2.png}">
+
+</head>
+<body>
+<header th:fragment="header">
+    <a th:href="@{/}" style="text-decoration: none;">
+    <div class="logo">
+
+            <img th:src="@{/images/logo2.png}" alt="Logo">
+            My Plant
+    </div>
+    </a>
+
+    <!-- Navigation -->
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/about}">About</a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/pesticides}">Pesticide</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/treatments}">Treatments</a>
+
+    </nav>
+
+    <!-- Buttons -->
+    <div class="header-buttons">
+        <a th:href="@{/login}" sec:authorize="isAnonymous()">Đăng nhập</a>
+        <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Đăng xuất</a>
+    </div>
+</header>
+</body>
+</html>

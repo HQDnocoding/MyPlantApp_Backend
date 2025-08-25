@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Treatment</title>
+    <link rel="stylesheet" th:href="@{/css/treatments.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/delete-btn.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo2.png}">
+
+</head>
+<body>
+<div th:replace="base :: header"></div>
+<div class="container">
+
+    <div id="message" style="margin-bottom: 10px;" >
+        <div th:if="${error}" style="color: #c0392b" th:text="${error}"></div>
+    </div>
+    <!-- Cột bên trái: Danh sách -->
+    <div class="treatment-list">
+        <table>
+            <thead>
+            <tr>
+                <th class="checkbox-col">
+                    <input type="checkbox" id="selectAll">
+                </th>
+                <th>ID</th>
+                <th>Dose per Acre</th>
+                <th>Instruction</th>
+                <th>Disease</th>
+                <th>Pesticide</th>
+                <th>Plant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="treatment : ${treatments}">
+                <td class="checkbox-col">
+                    <input type="checkbox" name="ids" th:value="${treatment.id}" class="rowCheckbox">
+                </td>
+
+                <td><a th:href="@{|/treatments/${treatment.id}|}"
+                       th:text="${treatment.id}"
+                       >
+                </a></td>
+                <td th:text="${treatment?.doseperacre}"></td>
+                <td th:text="${treatment?.instruction}"></td>
+                <td th:text="${treatment.disease?.name}"></td>
+                <td th:text="${treatment.pesticide?.name}"></td>
+                <td th:text="${treatment.plant?.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+            <button type="button" id="deleteBtn" class="delete-btn" disabled>Xóa đã chọn</button>
+            <a th:href="@{/treatments/create}" class="create-btn">Tạo mới</a>
+        </div>
+        <!-- Phân trang -->
+        <div class="pagination">
+            <a th:href="@{|/treatments?page=${currentPage - 1}|}" th:if="${currentPage > 1}">«</a>
+            <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a th:href="@{|/treatments?page=${i}|}"
+                   th:text="${i}"
+                   th:classappend="${i == currentPage} ? 'active' : ''"></a>
+            </span>
+            <a th:href="@{|/treatments?page=${currentPage + 1}|}" th:if="${currentPage < totalPages}">»</a>
+        </div>
+    </div>
+
+    <!-- Cột bên phải: Lọc & tìm kiếm -->
+    <div class="filter-panel">
+        <h3>Tìm kiếm</h3>
+        <form method="get" th:action="@{/treatments}">
+            <label>Disease:</label>
+            <input type="text" name="disease" placeholder="Tên bệnh">
+
+            <label>Pesticide:</label>
+            <input type="text" name="pesticide" placeholder="Tên thuốc">
+
+            <label>Plant:</label>
+            <input type="text" name="plant" placeholder="Tên cây">
+
+            <label>Dose per Acre:</label>
+            <input type="text" name="dose" placeholder="Liều lượng">
+
+            <button type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/delete-treatments.js}"></script>
+</body>
+</html>

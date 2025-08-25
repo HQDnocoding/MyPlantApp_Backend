@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo mới Pesticide</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <link rel="stylesheet" th:href="@{/css/modal.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo2.png}">
+
+</head>
+<body>
+<div th:replace="~{base :: header}"></div>
+<div class="container">
+
+    <div id="message" class="mt-3 text-center">
+        <div th:if="${error}" style="color: #c0392b" th:text="${error}"></div>
+    </div>
+
+    <h2>Tạo mới phương pháp điều trị</h2>
+    <form method="post" th:action="@{/treatments}" th:object="${treatment}">
+        <div class="form-group">
+            <label for="doseperacre">Liều lượng</label>
+            <input type="text" id="doseperacre" th:field="*{doseperacre}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="instruction">Hướng dẫn</label>
+            <textarea id="instruction" th:field="*{instruction}" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="diseaseDescription">Mô tả bệnh</label>
+            <textarea id="diseaseDescription" th:field="*{diseaseDescription}" rows="3"></textarea>
+        </div>
+
+        <!-- Chọn Plant -->
+        <div class="form-group">
+            <label>Cây trồng</label>
+            <div class="select-with-button">
+                <input type="hidden" id="plantId" th:field="*{plant}">
+                <input type="text" id="plantName" readonly placeholder="Chưa chọn">
+                <button type="button" onclick="openPlantModal()">Chọn</button>
+            </div>
+        </div>
+
+        <!-- Chọn Disease -->
+        <div class="form-group">
+            <label>Bệnh</label>
+            <div class="select-with-button">
+                <input type="hidden" id="diseaseId" th:field="*{disease}">
+                <input type="text" id="diseaseName" readonly placeholder="Chưa chọn">
+                <button type="button" onclick="openDiseaseModal()">Chọn</button>
+            </div>
+        </div>
+
+
+        <!-- Chọn thuoc-->
+        <div class="form-group">
+            <label>Thuốc</label>
+            <div class="select-with-button">
+                <input type="hidden" id="pesticideId" th:field="*{pesticide}">
+                <input type="text" id="pesticideName" readonly placeholder="Chưa chọn">
+                <button type="button" onclick="openPesticideModal()">Chọn</button>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Lưu</button>
+        <a th:href="@{/pesticides}" class="btn-secondary">Hủy</a>
+    </form>
+</div>
+
+<!-- Modal Plant -->
+<div id="plantModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePlantModal()">&times;</span>
+        <h3>Chọn Cây trồng</h3>
+        <input type="text" id="plantSearch" placeholder="Tìm kiếm..." oninput="searchPlantDebounced(1)">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+            </tr>
+            </thead>
+            <tbody id="plantTableBody"></tbody>
+        </table>
+        <div class="pagination" id="plantPagination"></div>
+    </div>
+</div>
+
+<!-- Modal Disease -->
+<div id="diseaseModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDiseaseModal()">&times;</span>
+        <h3>Chọn Bệnh</h3>
+        <input type="text" id="diseaseSearch" placeholder="Tìm kiếm..." oninput="searchDiseaseDebounced(1)">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+            </tr>
+            </thead>
+            <tbody id="diseaseTableBody"></tbody>
+        </table>
+        <div class="pagination" id="diseasePagination"></div>
+    </div>
+</div>
+
+
+<div id="pesticideModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePesticideModal()">&times;</span>
+        <h3>Chọn Thuốc</h3>
+        <input type="text" id="pesticideSearch" placeholder="Tìm kiếm..." oninput="searchPesticideDebounced(1)">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+            </tr>
+            </thead>
+            <tbody id="pesticideTableBody"></tbody>
+        </table>
+        <div class="pagination" id="pesticidePagination"></div>
+    </div>
+</div>
+<script src="/js/modal.js"></script>
+
+</body>
+</html>

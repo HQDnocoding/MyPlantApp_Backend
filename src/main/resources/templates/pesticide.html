@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Pesticide</title>
+    <link rel="stylesheet" th:href="@{/css/pesticides.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/delete-btn.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo2.png}">
+
+</head>
+<body>
+<div th:replace="base :: header"></div>
+<div class="container">
+    <!-- Cột trái: bảng danh sách -->
+    <div class="table-section">
+        <table>
+            <thead>
+            <tr>
+                <th class="checkbox-col">
+                    <input type="checkbox" id="selectAll">
+                </th>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Mô tả</th>
+                <th>Ngày tạo</th>
+                <th>Ngày cập nhật</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pesticide : ${pesticides}">
+                <td class="checkbox-col">
+                    <input type="checkbox" name="ids" th:value="${pesticide.id}" class="rowCheckbox">
+                </td>
+                <td th:text="${pesticide.id}"></td>
+                <td th:text="${pesticide.name}"></td>
+                <td th:text="${pesticide.description}"></td>
+                <td th:text="${#temporals.format(pesticide.createAt, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(pesticide.updateAt, 'dd/MM/yyyy')}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+            <button type="button" id="deleteBtn" class="delete-btn" disabled>Xóa đã chọn</button>
+            <a th:href="@{/pesticides/create}" class="create-btn">Tạo mới</a>
+        </div>
+        <!-- Phân trang -->
+        <div class="pagination">
+            <a th:href="@{|/treatments?page=${currentPage - 1}|}" th:if="${currentPage > 1}">«</a>
+            <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a th:href="@{|/treatments?page=${i}|}"
+                   th:text="${i}"
+                   th:classappend="${i == currentPage} ? 'active' : ''"></a>
+            </span>
+            <a th:href="@{|/treatments?page=${currentPage + 1}|}" th:if="${currentPage < totalPages}">»</a>
+        </div>
+    </div>
+
+    <!-- Cột phải: lọc tìm kiếm -->
+    <div class="filter-section">
+        <h3>Tìm kiếm</h3>
+        <form method="get" th:action="@{/pesticides}">
+            <label for="name">Tên Pesticide:</label>
+            <input type="text" id="name" name="name" th:value="${params.name}">
+
+            <label for="description">Mô tả:</label>
+            <input type="text" id="description" name="description" th:value="${params.description}">
+
+            <button type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/delete-items.js}"></script>
+
+</body>
+</html>

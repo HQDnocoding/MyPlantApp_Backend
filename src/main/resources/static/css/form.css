@@ -1,0 +1,198 @@
+/* ====== Layout chung ====== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ====== Tiêu đề ====== */
+h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+    border-left: 5px solid #2e7d32;
+    padding-left: 10px;
+}
+
+/* ====== Form ====== */
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+    transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #2e7d32;
+    outline: none;
+}
+
+/* ====== Nút ====== */
+.btn-primary {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #256428;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #cfcfcf;
+}
+
+/* ====== Input chọn kèm nút ====== */
+.select-with-button {
+    display: flex;
+    gap: 8px;
+}
+
+.select-with-button input[readonly] {
+    flex: 1;
+}
+
+.select-with-button button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.select-with-button button:hover {
+    background-color: #256428;
+}
+
+/* ====== Table ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f3f9f3;
+    cursor: pointer;
+}
+
+th {
+    background-color: #2e7d32;
+    color: white;
+}
+
+/* ====== Pagination ====== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination button {
+    border: none;
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background-color: #2e7d32;
+    color: white;
+}
+
+.pagination button:hover {
+    background-color: #d6d6d6;
+}
+
+/* ====== Modal ====== */
+.modal {
+    display: none; /* Mặc định ẩn */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 8% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.close {
+    color: #888;
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #2e7d32;
+}
+
+/* Search input trong modal */
+.modal-content input[type="text"] {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
